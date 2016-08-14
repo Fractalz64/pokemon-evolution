@@ -1,0 +1,29 @@
+/********** Base styles **********/
+* {
+  font-size: 16px;
+  font-family: 'Lucida Console', monospace;
+}
+
+/* BODY */
+body {
+	background-color: #dddddd;
+}
+
+ul {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+ul li {
+
+}
+
+.poke-tile {
+  border: 1px solid black;
+  height: 800px;
+  margin-right: 5px;
+  margin-left: 5px;
+  margin-bottom: 50px;
+  color: white;
+  overflow: auto;
+}
