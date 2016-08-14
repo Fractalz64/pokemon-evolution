@@ -1,3 +1,8 @@
+
+[ng\:cloak], [ng-cloak], .ng-cloak {
+  display: none;
+}
+
 /********** Base styles **********/
 * {
   font-size: 16px;
@@ -9,21 +14,63 @@ body {
 	background-color: #dddddd;
 }
 
-ul {
-    margin-left: auto;
-    margin-right: auto;
+#controls {
+  margin-top: 20px;
+  width: 220px;
 }
 
-ul li {
-
+input {
+  width: 40px;
 }
 
-.poke-tile {
+/*.tile {
+  margin-top: 10px;
   border: 1px solid black;
-  height: 800px;
-  margin-right: 5px;
-  margin-left: 5px;
-  margin-bottom: 50px;
-  color: white;
+}
+*/
+ul {
+  margin: 0;
+  padding: 0;
+  max-height: 800px;
+  min-height: 300px;
+  list-style-type: none;
   overflow: auto;
 }
+
+a, a:visited, a:hover, a:active {
+  color: black;
+}
+
+/*.poke-name {
+  width: 80px;
+}*/
+
+/*li {
+  width: 480px;
+}*/
+
+.poke-details {
+  margin-left: 20px;
+}
+
+/* Fancy scrollbar */
+::-webkit-scrollbar
+{
+  width: 12px;  /* for vertical scrollbars */
+  height: 12px; /* for horizontal scrollbars */
+}
+
+/*::-webkit-scrollbar-track
+{
+  background: rgba(0, 0, 0, 0.1);
+}*/
+
+::-webkit-scrollbar-thumb
+{
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+::selection {
+  background: #aaaaaa;
+};

@@ -9,7 +9,7 @@
 			var nextID;
 
 			// evenly distribute types
-			var numPerType = size/pokevo.types.length; 	
+			var numPerType = Math.floor(size/pokevo.types.length); 	
 			for (var t in pokevo.types) {
 				for (var i = 0; i < numPerType; i++) {
 					nextID = this.generation + "-" + id++;
@@ -20,7 +20,7 @@
 			// fill up the rest with pokemon of random types
 			while (p < size) {
 				nextID = this.generation + "-" + id++;
-				this.pokemon[p++] = randomPokemon(this.generation, nextID);
+				this.pokemon[p++] = pokevo.generators.randomPokemon(this.generation, nextID);
 			}
 			console.log(this.pokemon);
 		}
