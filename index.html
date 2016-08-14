@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html ng-app="app1">
+<head>
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/styles.css">
+	<meta charset="utf-8">
+	<title>Pokemon Evolution</title>
+</head>
+<body>
+
+  <div id="pokemon-list" ng-controller="ctrl1">
+    <ul>
+      <li ng-repeat="pokemon in population">
+        <b>ID</b>: {{pokemon.id}} <br>
+        <b>Type</b>: {{pokemon.printTyping()}} <br>
+        <b>Base Stats</b>: {{pokemon.baseStats}} <br>
+        <b>Stats</b>: {{pokemon.stats}} <br>
+        <b>IVs</b>: {{pokemon.ivs}} <br>
+        <b>Nature</b>: {{pokemon.nature.name}} <br>
+        <b>Intelligence</b>: {{pokemon.intelligence}} <br><br>
+     	</li>
+    </ul>
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+  <script src="js/jquery-1.11.3.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/Natures.js"></script>
+	<script src="js/Types.js"></script>
+	<script src="js/Pokemon.js"></script>
+  <script src="js/generators.js"></script>
+	<script src="js/Battle.js"></script>
+  <script src="js/Population.js"></script>
+	<script src="js/script.js"></script>
+</body>
+</html>
