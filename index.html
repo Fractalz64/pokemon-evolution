@@ -16,6 +16,7 @@
         <div id="controls" class="center-block">
           <span>Population size: <input type="text" ng-model="size"/></span><br>
           <button ng-click="generatePopulation()">Generate Population</button>
+          <button ng-click="calcFitness()">Battle</button>
         </div> 
       </div>
     </div>
@@ -24,21 +25,23 @@
       <div id="population-box" class="tile center-block">
         <h2 class="text-center">Population</h2>
         <p class="text-center">Click on a Pokemon to view its details.</p>
-        <ul class="center-block">
-          <li ng-repeat="pokemon in population">
+        <ul>
+          <li ng-repeat="pokemon in population" class="center-block">
             <a data-toggle="collapse" href="#poke-details-{{$index}}" aria-expanded="false" class="poke-name text-center">
             <b>{{pokemon.id}} {{pokemon.printTyping()}}</b>
             </a>
             <div class="collapse" id="poke-details-{{$index}}">
               <div class="card card-block">
                 <p class="poke-details">
-                <b>ID</b>: {{pokemon.id}} <br>
-                <b>Type</b>: {{pokemon.printTyping()}} <br>
-                <b>Base Stats</b>: {{pokemon.baseStats}} <br>
-                <b>Stats</b>: {{pokemon.stats}} <br>
-                <b>IVs</b>: {{pokemon.ivs}} <br>
-                <b>Nature</b>: {{pokemon.nature.name}} <br>
-                <b>Intelligence</b>: {{pokemon.intelligence}} <br><br>
+                  <b>Fitness</b>: {{pokemon.fitness}}<br>
+                  <b>Type</b>: {{pokemon.printTyping()}}<br>
+                  <b>Base Stats</b>: {{pokemon.baseStats}}<br>
+                  <b>Stats</b>: {{pokemon.stats}}<br>
+                  <b>IVs</b>: {{pokemon.ivs}}<br>
+                  <b>Nature</b>: {{pokemon.nature.name}}<br>
+                  <b>Intelligence</b>: {{pokemon.intelligence}}<br>
+                  <b>Moves</b>:<br>
+                  <span class="poke-moves">{{pokemon.printMoves()}}</span>
                 </p>
               </div>
             </div>
@@ -53,8 +56,10 @@
   <script src="js/bootstrap.min.js"></script>
   <script src="js/Natures.js"></script>
 	<script src="js/Types.js"></script>
+  <script src="js/Attacks.js"></script>
 	<script src="js/Pokemon.js"></script>
   <script src="js/generators.js"></script>
+  <script src="js/PokeAI.js"></script>
 	<script src="js/Battle.js"></script>
   <script src="js/Population.js"></script>
 	<script src="js/script.js"></script>

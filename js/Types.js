@@ -129,7 +129,7 @@
 
     pokevo.types = [grass, fire, water, electric, normal, fighting, psychic, dark, ghost, bug, flying, ice, ground, rock, steel, poison, fairy, dragon];
 
-    pokevo.getDamageMultiplier = function(moveType, pokeType) {
+    pokevo.getTypeEffectiveness = function(moveType, pokeType) {
         type1 = pokeType[0];
         type2 = pokeType[1] || noneType;
 

@@ -7,6 +7,7 @@
 * {
   font-size: 16px;
   font-family: 'Lucida Console', monospace;
+  color: black;
 }
 
 /* BODY */
@@ -37,8 +38,9 @@ ul {
   overflow: auto;
 }
 
-a, a:visited, a:hover, a:active {
-  color: black;
+a, a:visited, a:hover, a:active, a:focus {
+  color: inherit;
+  text-decoration: none;
 }
 
 /*.poke-name {
@@ -51,6 +53,11 @@ a, a:visited, a:hover, a:active {
 
 .poke-details {
   margin-left: 20px;
+}
+
+.poke-moves {
+  font-size: 90%;
+  white-space: pre-wrap;
 }
 
 /* Fancy scrollbar */
