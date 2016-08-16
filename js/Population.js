@@ -31,8 +31,9 @@
 			// battle every pokemon with every other pokemon.
 			// the winner gets +1 fitness.
 			for (var i = 0; i < this.pokemon.length; i++) {
-				for (var j = 0; j < this.pokemon.length; j++) { 
-					if (i != j) { 
+				for (var j = i+1; j < this.pokemon.length; j++) { 
+					// don't battle two pokemon that cannot damage each other
+					if (!pokevo.battle.mutuallyImmune(this.pokemon[i], this.pokemon[j])) { 
 						pokevo.battle.startBattle(this.pokemon[i], this.pokemon[j]);
 					}
 				}
@@ -40,3 +41,6 @@
 		}
 	}
 })(window.pokevo = window.pokevo || {});
+
+// 0 1 2 3 4
+// 0 1 2 3 4

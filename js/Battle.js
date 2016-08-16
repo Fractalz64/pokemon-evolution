@@ -1,5 +1,17 @@
 (function(pokevo) {
 	pokevo.battle = {
+		mutuallyImmune: function(poke1, poke2) {
+			function canDamage(attacker, defender) {
+				for (var i = 0; i < attacker.moves.length; i++) {
+					if (pokevo.getTypeEffectiveness(attacker.moves[i].type, defender.typing) > 0) {
+						return true;
+					}
+				}
+				return false;
+			}
+			return (!canDamage(poke1, poke2) && !canDamage(poke2, poke1));
+		},
+
 		calculateDamage: function(attacker, defender, move) {
 			console.log("calculating damage for " + attacker.id + " using " + move.toString + " on " + defender.id);
 			var attack = move.category == 0 ? attacker.spatk : attacker.atk;
