@@ -2,17 +2,18 @@
 	var pokeAI = {
 		// return the attack that will do the most damage
 		chooseBestAttack: function(attacker, defender) {
-			var bestMove = 0;
-			var bestDamage = 0;
-			for (var i = 0; i < pokevo.N_MOVES; i++) {
-				var damage = pokevo.battle.calculateDamage(attacker, defender, attacker.moves[i]);
-				if (damage > bestDamage) {
-					bestDamage = damage;
-					bestMove = i;
+			if (attacker.currentBestAttack == null) { // find the best move in the current battle
+				var bestDamage = 0;
+				attacker.currentBestAttack = 0;
+				for (var i = 0; i < pokevo.N_MOVES; i++) {
+					var damage = pokevo.battle.calculateDamage(attacker, defender, attacker.moves[i]);
+					if (damage > bestDamage) {
+						bestDamage = damage;
+						attacker.currentBestAttack = i;
+					}
 				}
 			}
-			console.log("choosing move " + bestMove + "\n");
-			return attacker.moves[bestMove];
+			return attacker.moves[attacker.currentBestAttack];
 		},
 
 		chooseRandomAttack: function(poke) {

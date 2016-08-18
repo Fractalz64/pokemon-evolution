@@ -24,6 +24,11 @@ input {
   width: 40px;
 }
 
+#statusMessage {
+  font-size: 150%;
+  margin-top: 100px;
+}
+
 /*.tile {
   margin-top: 10px;
   border: 1px solid black;

@@ -13,17 +13,11 @@
 		},
 
 		calculateDamage: function(attacker, defender, move) {
-			console.log("calculating damage for " + attacker.id + " using " + move.toString + " on " + defender.id);
 			var attack = move.category == 0 ? attacker.spatk : attacker.atk;
 			var defense = move.category == 0 ? defender.spdef : defender.def;
-			console.log("attacking stat is " + attack);
-			console.log("defending stat is " + defense);
 			var stab = attacker.typing.includes(move.type) ? 1.5 : 1;
-			console.log("STAB is " + stab);
 			var typeEffectiveness = pokevo.getTypeEffectiveness(move.type, defender.typing);
-			console.log("type effectiveness is " + typeEffectiveness);
 			var damage = (((2*pokevo.LEVEL + 10)/250) * (attack/defense) * move.damage + 2) * stab * typeEffectiveness;
-			console.log("damage is " + damage);
 			return Math.floor(damage);
 		},
 
@@ -47,39 +41,45 @@
 			}
 		},
 
+		hpPercent: function(poke) {
+			return poke.hp/poke.stats[0];
+		},
+
 		startBattle: function(poke1, poke2) {
-			//console.log("Starting battle between " + poke1.id " and " + poke2.id);
+			console.log("Starting battle between " + poke1.id + " and " + poke2.id);
 			poke1.resetStats();
 			poke2.resetStats();
 			var first;
 			var second;
+			var turns = 0;
 
 			while (poke1.hp > 0 && poke2.hp > 0) {
+				if (turns > 20) { // don't let a battle go on too long
+					console.log("ending battle after 20 turns");
+					return this.hpPercent(poke1) > this.hpPercent(poke2) ? poke1 : poke2;
+				}
 				var order = this.setTurnOrder(poke1, poke2);
 				first = order[0];
 				second = order[1];
-				console.log("first speed: " + first.speed + ", second speed: " + second.speed);
 				this.makeMove(first, second);
-				console.log("hp: " + second.hp + "\n");
-				console.log("-");
 				if (poke1.hp > 0 && poke2.hp > 0) {
 					this.makeMove(second, first);
-					console.log("hp: " + first.hp + "\n");
-					console.log("-");
 				}
+				turns++;
 			}
 
-			// increment fitness of the winner. 
+			// return winner
 			if (poke1.hp > 0) {
 				console.log(poke1.id + " wins!!\n")
 				console.log("-");
-				poke1.fitness++;
+				return poke1;
 			}
 			else if (poke2.hp > 0) {
 				console.log(poke2.id + " wins!!\n")
 				console.log("-");
-				poke2.fitness++;
+				return poke2;
 			}
+			return null; // draw
 		}
 	}
 })(window.pokevo = window.pokevo || {});

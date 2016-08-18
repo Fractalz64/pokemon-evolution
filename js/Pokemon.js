@@ -13,6 +13,7 @@
 		this.stats = [];
 		this.fitness = 0;
 		this.children = [];
+		this.currentBestAttack = null;
 		this.setStats = function() {
 			// HP formula
 			this.stats[0] = Math.floor(((2*baseStats[0] + ivs[0])*pokevo.LEVEL)/100 + pokevo.LEVEL + 10);
@@ -31,6 +32,7 @@
 			this.spatk = this.stats[3];
 			this.spdef = this.stats[4];
 			this.speed = this.stats[5];
+			this.currentBestAttack = null;
 		}
 
 		this.damage = function(amount) {
@@ -46,10 +48,6 @@
 				this.hp = this.stats[0];
 			}
 		}
-
-		// this.chooseAttack() {
-
-		// };
 
 		this.printTyping = function() {
 			return typing.length == 2 ? typing[0].name + "/" + typing[1].name : typing[0].name;
