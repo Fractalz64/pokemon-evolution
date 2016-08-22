@@ -12,18 +12,12 @@
 		this.moves = moves;
 		this.stats = [];
 		this.fitness = 0;
-		this.children = [];
 		this.currentBestAttack = null;
-		this.setStats = function() {
-			// HP formula
-			this.stats[0] = Math.floor(((2*baseStats[0] + ivs[0])*pokevo.LEVEL)/100 + pokevo.LEVEL + 10);
-			
-			// Other stats formula
-			for (var i = 1; i < baseStats.length; i++) {
-				this.stats[i] = Math.floor(((((2*baseStats[i] + ivs[i])*pokevo.LEVEL)/100 + 5)*nature.modifiers[i]));
-			}
-		}
-		this.setStats();
+		this.movesDamage = [];
+		this.children = [];
+		this.defeated = [];
+		this.defeatedBy = [];
+		this.tiedWith = [];
 
 		this.resetStats = function() {
 			this.hp = this.stats[0];
@@ -35,6 +29,20 @@
 			this.currentBestAttack = null;
 		}
 
+		this.setStats = function() {
+			// HP formula
+			this.stats[0] = Math.floor(((2*this.baseStats[0] + this.ivs[0])*pokevo.LEVEL)/100 + pokevo.LEVEL + 10);
+			
+			// Other stats formula
+			for (var i = 1; i < this.baseStats.length; i++) {
+				this.stats[i] = Math.floor(((((2*this.baseStats[i] + this.ivs[i])*pokevo.LEVEL)/100 + 5)*this.nature.modifiers[i]));
+			}
+			this.resetStats();
+		}
+		if (baseStats != undefined && nature != undefined) {
+			this.setStats();
+		}
+
 		this.damage = function(amount) {
 			this.hp -= amount;
 			if (this.hp < 0) {
@@ -43,22 +51,29 @@
 		}
 
 		this.heal = function(amount) {
-			this.hp += damage;
+			this.hp += amount;
 			if (this.hp > this.stats[0]) {
 				this.hp = this.stats[0];
 			}
 		}
 
 		this.printTyping = function() {
-			return typing.length == 2 ? typing[0].name + "/" + typing[1].name : typing[0].name;
+			return this.typing.length == 2 ? this.typing[0].name + "/" + this.typing[1].name : this.typing[0].name;
 		}
 
 		this.printMoves = function() {
 			var s = "";
-			for (var i = 0; i < moves.length; i++) {
-				s += "      -" + moves[i].toString + '\n';
+			for (var i = 0; i < this.moves.length; i++) {
+				s += "      -" + this.moves[i].toString + '\n';
 			}
 			return s;
+		}
+
+		this.printParents = function() {
+			if (parentA !== null) {
+				return parentA.id + ", " + parentB.id;
+			}
+			return "none";
 		}
 	}
 	pokevo.Pokemon = Pokemon;

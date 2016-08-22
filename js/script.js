@@ -13,16 +13,21 @@ pokevo.STATE = "";
 pokevo.MAX_IV = 31;
 pokevo.N_STATS = 6;
 pokevo.N_MOVES = 4;
+pokevo.random = Math.random;
 
 app1.controller('ctrl1', function($scope) {
 
 	var population;
 	$scope.size = 20;
 	$scope.mutationRate = 0.01;
+	$scope.disableBattle = true;
+	$scope.disableBreed = true;
+
 	$scope.generatePopulation = function() {
 		population = new pokevo.Population($scope.size, $scope.mutationRate);
 		pokevo.MUTATION_RATE = $scope.mutationRate;
 		$scope.population = population.pokemon;
+		$scope.disableBattle = false;
 	}
 
 	$scope.message = "";
@@ -40,9 +45,15 @@ app1.controller('ctrl1', function($scope) {
 
 	$scope.sortByFitness = true;
 	$scope.battle = function() {
-		$scope.message = "battling...";
-		population.calculateFitness();
-		$scope.message = "done";
+		//$scope.message = "battling...";
+		population.battleAll();
+		//$scope.message = "done";
+		$scope.disableBreed = false;
+	}
+
+	$scope.nextGen = function() {
+		population.populateNextGeneration();
+		$scope.population = population.pokemon;
 	}
 });
 

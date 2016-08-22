@@ -5,8 +5,17 @@
 	}
 
 	randInt = function(bound) {
-			return Math.floor(Math.random()*bound);
+			return Math.floor(pokevo.random()*bound);
 	}
+
+	sumArray = function(array) {
+		var sum = 0;
+		for (var i = 0; i < array.length; i++) {
+			sum += array[i];
+		}
+		return sum;
+	}
+
 
 	pokevo.generators = {
 	  	// generate stats that sum to BST

@@ -8,15 +8,17 @@
 </head>
 <body>
 
-  <div ng-controller="ctrl1">
+<div id="main content" class="container">
+  <div ng-controller="ctrl1" class="row">
     <div class="col-md-6">
-      <div id="control-box" class="tile center-block">
+      <div id="control-box">
         <h2 class="text-center">Controls</h2>
         <p class="text-center">Generate a population of Pokemon of the given size.</p>
         <div id="controls" class="center-block">
           <span>Population size: <input type="text" ng-model="size"/></span><br>
           <button ng-click="generatePopulation()">Generate Population</button>
-          <button ng-click="battle()">Battle</button> <br>
+          <button ng-disabled="disableBattle" ng-click="battle()">Battle</button> <br>
+          <button ng-disabled="disableBreed" ng-click="nextGen()">Breed next generation</button> <br>
           <input type="checkbox" ng-model="sortByFitness">Sort by fitness</input>
           <div id="statusMessage" class="center-block">
             {{message}}
@@ -26,27 +28,36 @@
     </div>
 
     <div class="col-md-6">
-      <div id="population-box" class="tile center-block">
+      <div id="population-box">
         <h2 class="text-center">Population</h2>
         <p class="text-center">Click on a Pokemon to view its details.</p>
-        <ul>
+        <ul class="center-block">
           <li ng-repeat="pokemon in population | orderBy:'-fitness'">
             <a data-toggle="collapse" href="#poke-details-{{$index}}" aria-expanded="false" class="poke-name">
             <b>{{pokemon.id}} {{pokemon.printTyping()}}</b>
             </a>
             <div class="collapse" id="poke-details-{{$index}}">
               <div class="card card-block">
-                <p class="poke-details">
+                <div class="poke-details">
                   <b>Battles Won</b>: {{pokemon.fitness}}<br>
-                  <b>Type</b>: {{pokemon.printTyping()}}<br>
+                  <a data-toggle="collapse" data-parent="#poke-details-{{$index}}" href="#poke-battle-records-{{$index}}" aria-expanded="false">
+                    <b>Battle Records</b></a> <br>
+                    <div class="collapse in" id="poke-battle-records-{{$index}}">
+                      <b>Won Against</b>: {{pokemon.defeated}} <br>
+                      <b>Lost Against</b>: {{pokemon.defeatedBy}} <br>
+                      <b>Tied With</b>: {{pokemon.tiedWith}} <br>
+                    </div>
+                  <b>Parents</b>: {{pokemon.printParents()}}<br>
+                  <b>Children</b>: {{pokemon.children}} <br>
                   <b>Base Stats</b>: {{pokemon.baseStats}}<br>
                   <b>Stats</b>: {{pokemon.stats}}<br>
                   <b>IVs</b>: {{pokemon.ivs}}<br>
                   <b>Nature</b>: {{pokemon.nature.name}}<br>
                   <b>Intelligence</b>: {{pokemon.intelligence}}<br>
-                  <b>Moves</b>:<br>
-                  <span class="poke-moves">{{pokemon.printMoves()}}</span>
-                </p>
+                  <a data-toggle="collapse" data-parent="#poke-details-{{$index}}" href="#poke-moves-{{$index}}" aria-expanded="false">
+                    <b>Moves</b></a> 
+                    <div class="collapse in poke-moves" id="poke-moves-{{$index}}">{{pokemon.printMoves()}}</div>
+                </div>
               </div>
             </div>
           </li>
@@ -54,7 +65,7 @@
       </div>
     </div>
   </div>
-
+</div>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
   <script src="js/jquery-1.11.3.min.js"></script>
   <script src="js/bootstrap.min.js"></script>

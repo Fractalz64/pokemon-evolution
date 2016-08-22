@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>QUnit Example</title>
+  <link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.0.1.css">
+</head>
+<body>
+  <div id="qunit"></div>
+  <div id="qunit-fixture"></div>
+  <script src="https://code.jquery.com/qunit/qunit-2.0.1.js"></script>
+  <script type="text/javascript">
+  	// global variables
+  	window.pokevo = {};
+	pokevo.MAX_INTEL = 100;
+	pokevo.BST = 600;
+	pokevo.LEVEL = 100;
+	pokevo.DUAL_TYPE_CHANCE = 0.7;
+	pokevo.IVS_INHERITED = 3;
+	pokevo.NATURE_INHERITANCE = 0.5;
+	pokevo.MUTATION_RATE = 0.01;
+	pokevo.STATE = "";
+	pokevo.random = Math.random;
+
+	// basic pokemon stuff that won't change
+	pokevo.MAX_IV = 31;
+	pokevo.N_STATS = 6;
+	pokevo.N_MOVES = 4;
+  </script>
+  <script src="../js/Types.js"></script>
+  <script src="testTypes.js"></script>
+  <script src="../js/Pokemon.js"></script>
+  <script src="../js/Natures.js"></script>
+  <script src="../js/Attacks.js"></script>
+  <script src="testPokemon.js"></script>
+  <script src="../js/generators.js"></script>
+  <script src="testGenerators.js"></script>
+  <script src="../js/Battle.js"></script>
+  <script src="testBattle.js"></script>
+  <script src="../js/PokeAI.js"></script>
+  <script src="testPokeAI.js"></script>
+  <script src="../js/breeder.js"></script>
+  <script src="testBreeder.js"></script>
+
+</body>
+</html>
