@@ -16,12 +16,11 @@ body {
 }
 
 #controls {
-  margin-top: 20px;
   width: 220px;
 }
 
 input {
-  width: 40px;
+  width: 50px;
 }
 
 #statusMessage {
@@ -29,37 +28,56 @@ input {
   margin-top: 100px;
 }
 
-/*.tile {
-  margin-top: 10px;
-  border: 1px solid black;
+hr {
+  border-color: black;
 }
-*/
+
 ul {
-  height: 800px;
   list-style-type: none;
   overflow: auto;
 }
 
+#generation-selection {
+  columns: 10;
+  -webkit-columns: 10;
+  -moz-columns: 10;
+  max-height: 80px;
+}
+
+#pokemon-list {
+  height: 700px;
+}
+
 a, a:visited, a:hover, a:active, a:focus {
-  color: inherit;
+  color:  #571ca7;
   text-decoration: none;
 }
 
-/*.poke-name {
-  width: 80px;
-}*/
+b {
+  color: inherit;
+}
 
-/*li {
-  width: 480px;
-}*/
+#controls {
+  margin-top: 50px;
+}
+
+#population {
+  margin-left: 50px;
+}
 
 .poke-details {
+  margin-left: 20px;
+  margin-bottom: 20px;
+}
+
+.poke-battle-records {
   margin-left: 20px;
 }
 
 .poke-moves {
   font-size: 90%;
   white-space: pre-wrap;
+  margin-left: 20px;
 }
 
 /* Fancy scrollbar */

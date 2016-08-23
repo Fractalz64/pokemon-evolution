@@ -18,16 +18,19 @@ pokevo.random = Math.random;
 app1.controller('ctrl1', function($scope) {
 
 	var population;
-	$scope.size = 20;
+	$scope.pop_size = 20;
 	$scope.mutationRate = 0.01;
 	$scope.disableBattle = true;
 	$scope.disableBreed = true;
 
 	$scope.generatePopulation = function() {
-		population = new pokevo.Population($scope.size, $scope.mutationRate);
-		pokevo.MUTATION_RATE = $scope.mutationRate;
-		$scope.population = population.pokemon;
-		$scope.disableBattle = false;
+		if (typeof $scope.pop_size === 'number' && $scope.pop_size >=2 && $scope.pop_size <= 200) {
+			population = new pokevo.Population($scope.pop_size, $scope.mutationRate);
+			pokevo.MUTATION_RATE = $scope.mutationRate;
+			$scope.population = population.pokemon;
+			$scope.generations = population.generations;
+			$scope.disableBattle = false;
+		}
 	}
 
 	$scope.message = "";
@@ -54,7 +57,13 @@ app1.controller('ctrl1', function($scope) {
 	$scope.nextGen = function() {
 		population.populateNextGeneration();
 		$scope.population = population.pokemon;
+		$scope.disableBreed = true;
 	}
+
+	$scope.showGeneration = function(index) {
+		$scope.population = population.generations[index];
+	}
+
 });
 
 // $("p:contains(Grass)").css("color", "green");

@@ -1,6 +1,7 @@
 (function(pokevo) {
 	pokevo.Population = function(size = 180, mutationRate = 0.01) {
 		this.pokemon = [size];
+		this.generations = [];
 		this.generation = 0;
 		this.maxFitness = 0;
 		this.id = 0;
@@ -23,6 +24,7 @@
 				nextID = this.generation + "-" + this.id++;
 				this.pokemon[p++] = pokevo.generators.randomPokemon(this.generation, nextID);
 			}
+			this.generations[this.generation] = this.pokemon;
 			console.log(this.pokemon);
 		}
 		this.initPopulation();
@@ -86,6 +88,7 @@
 				nextGen[i] = this.breedPokemon();
 			}
 			this.pokemon = nextGen;
+			this.generations[this.generation] = this.pokemon;
 			console.log(this.pokemon);
 		}
 	}

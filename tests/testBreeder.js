@@ -45,7 +45,6 @@ QUnit.test("Breeder: test type inheritence", function(assert) {
 	var nums = [0.9, 0.5, 0.1, 0.9];
 	var i = 0;
 	pokevo.random = function() {
-		console.log(i);
 		return nums[i++];
 	};
 

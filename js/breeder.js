@@ -49,7 +49,7 @@
 		},
 
 		inheritStats: function(parentA, parentB) {
-			console.log("generating stats...");
+			// console.log("generating stats...");
 			// var baseStats = [];
 			// for (var i = 0; i < pokevo.N_STATS; i++) { // inherit each stat from random parent
 			// 	var r = randInt(2);

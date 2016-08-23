@@ -64,7 +64,7 @@
 		this.printMoves = function() {
 			var s = "";
 			for (var i = 0; i < this.moves.length; i++) {
-				s += "      -" + this.moves[i].toString + '\n';
+				s += "-" + this.moves[i].toString + '\n';
 			}
 			return s;
 		}
@@ -74,6 +74,18 @@
 				return parentA.id + ", " + parentB.id;
 			}
 			return "none";
+		}
+
+		this.printStats = function(statsArray) {
+			if (statsArray.length == pokevo.N_STATS) {
+				return (
+				  "HP:          " + statsArray[0] + 
+				"\nAttack:      " + statsArray[1] + 
+				"\nDefense:     " + statsArray[2] +
+				"\nSp. Attack:  " + statsArray[3] + 
+				"\nSp. Defense: " + statsArray[4] + 
+				"\nSpeed:       " + statsArray[5]);
+			}
 		}
 	}
 	pokevo.Pokemon = Pokemon;
