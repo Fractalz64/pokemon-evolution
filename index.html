@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="app1">
+<html ng-app="app1" ng-cloak>
 <head>
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/styles.css">
@@ -8,28 +8,98 @@
 </head>
 <body>
 
-  <div id="pokemon-list" ng-controller="ctrl1">
-    <ul>
-      <li ng-repeat="pokemon in population">
-        <b>ID</b>: {{pokemon.id}} <br>
-        <b>Type</b>: {{pokemon.printTyping()}} <br>
-        <b>Base Stats</b>: {{pokemon.baseStats}} <br>
-        <b>Stats</b>: {{pokemon.stats}} <br>
-        <b>IVs</b>: {{pokemon.ivs}} <br>
-        <b>Nature</b>: {{pokemon.nature.name}} <br>
-        <b>Intelligence</b>: {{pokemon.intelligence}} <br><br>
-     	</li>
-    </ul>
-  </div>
+<div id="main content" class="container">
+  <div ng-controller="ctrl1" class="row">
+    <div class="col-md-6 col-sm-12">
+      <div id="info">
+        <h2 class="text-center">Info</h2>
+        <p>
+          Generate a population of Pokemon of the given size, have them battle each other, 
+          and then have them breed to make a new generation. The more battles a Pokemon wins,
+          the higher chance it has to breed and pass its genes to the next generation. <br>
+          'Intelligence' is a stat I made up that determines how likely a Pokemon is to 
+          use its best move in battle, or choose randomly.
+        </p>
+      </div>
+      <hr>
+      <div id="controls" class="center-block">
+        <h2 class="text-center">Controls</h2>
+        <span>Population size: <input type="number" step="1" min="2" max="200" ng-model="pop_size" title="enter an integer between 2 and 200"/></span><br>
+        <button ng-click="generatePopulation()" title="population size must be an integer between 2 and 200">Generate Population</button>
+        <button ng-disabled="disableBattle" ng-click="battle()" title="a population must exist first">Battle</button> <br>
+        <button ng-disabled="disableBreed" ng-click="nextGen()" title="the population must have battled first">Breed next generation</button> <br>
+        <input type="checkbox" ng-model="sortByFitness">Sort by fitness</input>
+        <div id="statusMessage" class="center-block">
+          {{message}}
+        </div>
+      </div>
+    </div>
 
+    <div class="col-md-6 col-sm-12">
+      <div id="population">
+        <h2 class="text-center">Population</h2>
+        <p class="text-center">Click on a Pokemon to view its details.<br>Anything purple can be clicked to be expanded.</p> <hr>
+        <div id="generations" title="click on a number to show that generation">
+          <h4 class="text-center">Generations</h4>
+          <ul id="generation-selection"> 
+            <li ng-repeat="gen in generations">
+              <a ng-click="showGeneration($index)">{{$index}}</a>
+            </li>
+          </ul>
+        </div>
+        <hr>
+        <ul id="pokemon-list" class="center-block">
+          <li ng-repeat="pokemon in population | orderBy:'-fitness'">
+            <a data-toggle="collapse" href="#poke-details-{{$index}}" aria-expanded="false" class="poke-name">
+            <h4>{{pokemon.id}} {{pokemon.printTyping()}}</h4>
+            </a>
+            <div class="collapse" id="poke-details-{{$index}}">
+              <div class="card card-block">
+                <div class="poke-details">
+                  <b>Battles Won</b>: {{pokemon.fitness}}<br>
+                  <a data-toggle="collapse" data-parent="#poke-details-{{$index}}" href="#poke-battle-records-{{$index}}" aria-expanded="false">
+                    <b>Battle Records</b></a> <br>
+                    <div class="collapse poke-battle-records" id="poke-battle-records-{{$index}}">
+                      <b>Won Against</b>: {{pokemon.defeated}} <br>
+                      <b>Lost Against</b>: {{pokemon.defeatedBy}} <br>
+                      <b>Tied With</b>: {{pokemon.tiedWith}} <br>
+                    </div>
+                  <b>Parents</b>: {{pokemon.printParents()}}<br>
+                  <b>Children</b>: {{pokemon.children}} <br>
+                  <a data-toggle="collapse" data-parent="#poke-details-{{$index}}" href="#poke-base-stats-{{$index}}" aria-expanded="false">
+                  <b>Base Stats</b></a>: {{pokemon.baseStats}}<br>
+                  <div class="collapse poke-moves" id="poke-base-stats-{{$index}}">{{pokemon.printStats(pokemon.baseStats)}}</div>
+                  <a data-toggle="collapse" data-parent="#poke-details-{{$index}}" href="#poke-stats-{{$index}}" aria-expanded="false">
+                  <b>Stats</b></a>: {{pokemon.stats}}<br>
+                  <div class="collapse poke-moves" id="poke-stats-{{$index}}">{{pokemon.printStats(pokemon.stats)}}</div>
+                  <a data-toggle="collapse" data-parent="#poke-details-{{$index}}" href="#poke-ivs-{{$index}}" aria-expanded="false">
+                  <b>IVs</b></a>: {{pokemon.ivs}}<br>
+                  <div class="collapse poke-moves" id="poke-ivs-{{$index}}">{{pokemon.printStats(pokemon.ivs)}}</div>
+                  <b>Nature</b>: {{pokemon.nature.name}} ({{pokemon.nature.description}})<br>
+                  <b>Intelligence</b>: {{pokemon.intelligence}}<br>
+                  <a data-toggle="collapse" data-parent="#poke-details-{{$index}}" href="#poke-moves-{{$index}}" aria-expanded="false">
+                  <b>Moves</b></a> 
+                  <div class="collapse poke-moves" id="poke-moves-{{$index}}">{{pokemon.printMoves()}}</div>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
   <script src="js/jquery-1.11.3.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
   <script src="js/Natures.js"></script>
 	<script src="js/Types.js"></script>
+  <script src="js/Attacks.js"></script>
 	<script src="js/Pokemon.js"></script>
   <script src="js/generators.js"></script>
+  <script src="js/PokeAI.js"></script>
 	<script src="js/Battle.js"></script>
+  <script src="js/breeder.js"></script>
   <script src="js/Population.js"></script>
 	<script src="js/script.js"></script>
 </body>

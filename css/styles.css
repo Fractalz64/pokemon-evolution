@@ -1,7 +1,13 @@
+
+[ng\:cloak], [ng-cloak], .ng-cloak {
+  display: none;
+}
+
 /********** Base styles **********/
 * {
   font-size: 16px;
   font-family: 'Lucida Console', monospace;
+  color: black;
 }
 
 /* BODY */
@@ -9,21 +15,89 @@ body {
 	background-color: #dddddd;
 }
 
+#controls {
+  width: 220px;
+}
+
+input {
+  width: 50px;
+}
+
+#statusMessage {
+  font-size: 150%;
+  margin-top: 100px;
+}
+
+hr {
+  border-color: black;
+}
+
 ul {
-    margin-left: auto;
-    margin-right: auto;
-}
-
-ul li {
-
-}
-
-.poke-tile {
-  border: 1px solid black;
-  height: 800px;
-  margin-right: 5px;
-  margin-left: 5px;
-  margin-bottom: 50px;
-  color: white;
+  list-style-type: none;
   overflow: auto;
 }
+
+#generation-selection {
+  columns: 10;
+  -webkit-columns: 10;
+  -moz-columns: 10;
+  max-height: 80px;
+}
+
+#pokemon-list {
+  height: 700px;
+}
+
+a, a:visited, a:hover, a:active, a:focus {
+  color:  #571ca7;
+  text-decoration: none;
+}
+
+b {
+  color: inherit;
+}
+
+#controls {
+  margin-top: 50px;
+}
+
+#population {
+  margin-left: 50px;
+}
+
+.poke-details {
+  margin-left: 20px;
+  margin-bottom: 20px;
+}
+
+.poke-battle-records {
+  margin-left: 20px;
+}
+
+.poke-moves {
+  font-size: 90%;
+  white-space: pre-wrap;
+  margin-left: 20px;
+}
+
+/* Fancy scrollbar */
+::-webkit-scrollbar
+{
+  width: 12px;  /* for vertical scrollbars */
+  height: 12px; /* for horizontal scrollbars */
+}
+
+/*::-webkit-scrollbar-track
+{
+  background: rgba(0, 0, 0, 0.1);
+}*/
+
+::-webkit-scrollbar-thumb
+{
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+::selection {
+  background: #aaaaaa;
+};
