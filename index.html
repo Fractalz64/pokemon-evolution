@@ -13,12 +13,17 @@
     <div class="col-md-6 col-sm-12">
       <div id="info">
         <h2 class="text-center">Info</h2>
-        <p>
+        <p class="info-text">
           Generate a population of Pokemon of the given size, have them battle each other, 
           and then have them breed to make a new generation. The more battles a Pokemon wins,
-          the higher chance it has to breed and pass its genes to the next generation. <br>
-          'Intelligence' is a stat I made up that determines how likely a Pokemon is to 
-          use its best move in battle, or choose randomly.
+          the higher chance it has to breed and pass its genes to the next generation. 
+          <a data-toggle="collapse" data-parent="#info" href="#info-more" aria-expanded="false">more</a>
+          <div class="collapse" id="info-more">
+            <p>
+              'Intelligence' is a stat I made up that determines how likely a Pokemon is to 
+              use its best move in battle, or choose randomly.
+            </p>
+          </div>
         </p>
       </div>
       <hr>
@@ -28,7 +33,6 @@
         <button ng-click="generatePopulation()" title="population size must be an integer between 2 and 200">Generate Population</button>
         <button ng-disabled="disableBattle" ng-click="battle()" title="a population must exist first">Battle</button> <br>
         <button ng-disabled="disableBreed" ng-click="nextGen()" title="the population must have battled first">Breed next generation</button> <br>
-        <input type="checkbox" ng-model="sortByFitness">Sort by fitness</input>
         <div id="statusMessage" class="center-block">
           {{message}}
         </div>
@@ -38,7 +42,7 @@
     <div class="col-md-6 col-sm-12">
       <div id="population">
         <h2 class="text-center">Population</h2>
-        <p class="text-center">Click on a Pokemon to view its details.<br>Anything purple can be clicked to be expanded.</p> <hr>
+        <p class="text-center info-text">Click on a Pokemon to view its details.<br>Anything purple can be clicked to be expanded.</p> <hr>
         <div id="generations" title="click on a number to show that generation">
           <h4 class="text-center">Generations</h4>
           <ul id="generation-selection"> 

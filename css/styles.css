@@ -15,6 +15,10 @@ body {
 	background-color: #dddddd;
 }
 
+.info-text {
+  font-size: 90%;
+}
+
 #controls {
   width: 220px;
 }
